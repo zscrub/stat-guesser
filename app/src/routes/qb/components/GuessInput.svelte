@@ -5,19 +5,19 @@
 
     let input: string = "";
     let quarterbacks: Array<Quarterback>;
-    let guesses: Array<string> = [];
+    let guesses: Array<Quarterback | undefined> = [];
 
     $: quarterbacks = input?.length ? 
         quarterback_stats.filter((qb) => qb.NAME.toLowerCase().includes(input.toLowerCase()) && !guesses.includes(qb.NAME.toLowerCase()))
-    : quarterback_stats.filter((qb) => !guesses.includes(qb.NAME.toLowerCase()))
+    : quarterback_stats.filter((qb) => !guesses.includes(qb))
 
     const process_guess = (event: MouseEvent | null) => {
         if (event instanceof MouseEvent) {
             input = (event?.target as HTMLElement)?.textContent ?? ""
         }
-        guesses.push(input.toLowerCase())
+        guesses.push(quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase()))
         
-        quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb.NAME.toLowerCase()))
+        quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb))
         input = ""
     }
 
@@ -39,7 +39,7 @@
     <div class="overflow-y-auto max-h-96 border border-gray-500 rounded-md">
         {#each quarterbacks as quarterback}
             <button class="w-full pt-3" on:click={process_guess}>
-                <Button class="w-full" color="alternative" size="lg" on:click={process_guess} outline>
+                <Button class="w-full" color="alternative" size="lg" outline>
                     {quarterback.NAME}
                 </Button>
             </button>
