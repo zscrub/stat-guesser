@@ -1,16 +1,20 @@
 <script lang="ts">
-    import { Helper, Table, TableBody, TableBodyCell } from "flowbite-svelte";
-import GuessInput from "./components/GuessInput.svelte";
-import UnknownPlayer from "./components/UnknownPlayer.svelte";
+    import GuessInput from "./components/GuessInput.svelte";
+    import GuessTable from "./components/GuessTable.svelte";
+    import UnknownPlayer from "./components/UnknownPlayer.svelte";
 </script>
 
 
-<section class="h-full grid grid-cols-1 gap-4 content-between p-4">
-    <div class="pb-6">
+<div class="h-full grid grid-cols-1 gap-4 content-between p-4">
+    <section class="h-full grid grid-cols-1 gap-4 content-between p-4">
         <UnknownPlayer />
-    </div>
+    </section>
 
-    <div>
+    <section>
         <GuessInput />
-    </div>
-</section>
+    </section>
+
+    <section class="pt-5">
+        <GuessTable />
+    </section>
+</div>

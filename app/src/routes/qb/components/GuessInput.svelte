@@ -15,11 +15,17 @@
         if (event instanceof MouseEvent) {
             input = (event?.target as HTMLElement)?.textContent ?? ""
         }
-        guesses.push(quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase()))
+
+        const res = quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase())
+
+        if (res === undefined) {
+            return
+        }
+
+        guesses.push(res)
         
         quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb))
         input = ""
-        console.log(guesses)
     }
 
     onMount(() => {
@@ -27,8 +33,11 @@
     
         div?.addEventListener('keydown', (e) => {
             if ((e as KeyboardEvent).key === 'Enter') {
-                input = quarterbacks[0].NAME
-                process_guess(null)
+                if (!quarterbacks?.length) return
+                const qb = quarterbacks[0]
+                guesses.push(qb)
+                quarterbacks = quarterbacks.slice(1)
+                input = ""
             }
         })
     });
@@ -39,11 +48,10 @@
 <section class="max-h-32">
     <div class="overflow-y-auto max-h-96 border border-gray-500 rounded-md">
         {#each quarterbacks as quarterback}
-            <button class="w-full pt-3" on:click={process_guess}>
-                <Button class="w-full" color="alternative" size="lg" outline>
-                    {quarterback.NAME}
-                </Button>
-            </button>
+            <Button class="w-full pt-3" color="alternative" size="lg" on:click={process_guess} outline>
+                {quarterback.NAME}
+            </Button>
+            <br />
         {/each}
     </div>
 </section>
