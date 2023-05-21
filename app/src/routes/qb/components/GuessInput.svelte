@@ -3,14 +3,13 @@
     import { quarterback_stats, type Quarterback } from "../../../stats";
     import { onMount } from "svelte";
 
-    let dropdown: Boolean;
     let input: string = "";
     let quarterbacks: Array<Quarterback>;
     let guesses: Array<string> = [];
 
-    $: quarterbacks = input.length ? quarterback_stats.filter((qb) => {
-        qb.NAME.toLowerCase().includes(input.toLowerCase()) && !guesses.includes(qb.NAME.toLowerCase())
-    }) : quarterback_stats.filter((qb) => !guesses.includes(qb.NAME.toLowerCase()))
+    $: quarterbacks = input?.length ? 
+        quarterback_stats.filter((qb) => qb.NAME.toLowerCase().includes(input.toLowerCase()) && !guesses.includes(qb.NAME.toLowerCase()))
+    : quarterback_stats.filter((qb) => !guesses.includes(qb.NAME.toLowerCase()))
 
     const process_guess = (event: MouseEvent | null) => {
         if (event instanceof MouseEvent) {
@@ -20,7 +19,6 @@
         
         quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb.NAME.toLowerCase()))
         input = ""
-        dropdown = false
     }
 
     onMount(() => {
@@ -32,18 +30,19 @@
                 process_guess(null)
             }
         })
-    }); 
+    });
 </script>
 
 
-<Search id="search" on:focus={() => dropdown = true} on:blur={() => dropdown = false} placeholder="Guess the player" bind:value={input} />
-    {#each quarterbacks as quarterback}
-        <Button class="w-full pt-5 pb-5" color="alternative" size="lg" on:click={process_guess} outline>
-            {quarterback.NAME}
-        </Button>
-    {/each}
+<Search id="search" placeholder="Guess the player" bind:value={input} />
 <section class="max-h-32">
-    <div class={(dropdown ? " " : "hidden ") + "overflow-y-auto max-h-96"}>
+    <div class="overflow-y-auto max-h-96 border border-gray-500 rounded-md">
+        {#each quarterbacks as quarterback}
+            <button class="w-full pt-3" on:click={process_guess}>
+                <Button class="w-full" color="alternative" size="lg" on:click={process_guess} outline>
+                    {quarterback.NAME}
+                </Button>
+            </button>
+        {/each}
     </div>
-
 </section>
