@@ -14,7 +14,7 @@
 
     const process_guess = (event: MouseEvent | null) => {
         if (event instanceof MouseEvent) {
-            input = event?.target?.textContent
+            input = (event?.target as HTMLElement)?.textContent ?? ""
         }
         guesses.push(input.toLowerCase())
         
