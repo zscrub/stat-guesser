@@ -15,7 +15,17 @@
         if (event instanceof MouseEvent) {
             input = (event?.target as HTMLElement)?.textContent ?? ""
         }
-        guesses.push(quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase()))
+
+        const res = quarterbacks.find((qb) => {
+            qb.NAME.toLowerCase() === input.toLowerCase()
+        })
+
+        if (res === undefined) {
+            console.log
+            return
+        }
+
+        guesses.push(res)
         
         quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb))
         input = ""
@@ -27,7 +37,10 @@
     
         div?.addEventListener('keydown', (e) => {
             if ((e as KeyboardEvent).key === 'Enter') {
-                input = quarterbacks[0].NAME
+                // rare cases where the player wont show up due to a ghost space
+                
+                input = quarterbacks[0]?.NAME ?? input
+                input = input.trimEnd()
                 process_guess(null)
             }
         })
@@ -39,11 +52,12 @@
 <section class="max-h-32">
     <div class="overflow-y-auto max-h-96 border border-gray-500 rounded-md">
         {#each quarterbacks as quarterback}
-            <button class="w-full pt-3" on:click={process_guess}>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div class="w-full pt-3" on:click={process_guess}>
                 <Button class="w-full" color="alternative" size="lg" outline>
                     {quarterback.NAME}
                 </Button>
-            </button>
+            </div>
         {/each}
     </div>
 </section>
