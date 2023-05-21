@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Search } from "flowbite-svelte";
+    import { Button, Search, Select } from "flowbite-svelte";
     import { quarterback_stats, type Quarterback } from "../../../stats";
     import { onMount } from "svelte";
 
@@ -16,12 +16,9 @@
             input = (event?.target as HTMLElement)?.textContent ?? ""
         }
 
-        const res = quarterbacks.find((qb) => {
-            qb.NAME.toLowerCase() === input.toLowerCase()
-        })
+        const res = quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase())
 
         if (res === undefined) {
-            console.log
             return
         }
 
@@ -29,7 +26,6 @@
         
         quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb))
         input = ""
-        console.log(guesses)
     }
 
     onMount(() => {
@@ -37,11 +33,10 @@
     
         div?.addEventListener('keydown', (e) => {
             if ((e as KeyboardEvent).key === 'Enter') {
-                // rare cases where the player wont show up due to a ghost space
-                
-                input = quarterbacks[0]?.NAME ?? input
-                input = input.trimEnd()
-                process_guess(null)
+                const qb = quarterbacks[0]
+                guesses.push(qb)
+                quarterbacks = quarterbacks.slice(1)
+                input = ""
             }
         })
     });
@@ -52,12 +47,10 @@
 <section class="max-h-32">
     <div class="overflow-y-auto max-h-96 border border-gray-500 rounded-md">
         {#each quarterbacks as quarterback}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="w-full pt-3" on:click={process_guess}>
-                <Button class="w-full" color="alternative" size="lg" outline>
-                    {quarterback.NAME}
-                </Button>
-            </div>
+            <Button class="w-full pt-3" color="alternative" size="lg" on:click={process_guess} outline>
+                {quarterback.NAME}
+            </Button>
+            <br />
         {/each}
     </div>
 </section>
