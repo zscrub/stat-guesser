@@ -1,5 +1,9 @@
 <script lang="ts">
-    import UnknownPlayer from "./components/UnknownPlayer.svelte";
+    import GuessInput from "./components/GuessInput.svelte";
+import UnknownPlayer from "./components/UnknownPlayer.svelte";
 </script>
 
+
 <UnknownPlayer />
+
+<GuessInput />

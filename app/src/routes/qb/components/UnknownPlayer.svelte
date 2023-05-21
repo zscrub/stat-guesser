@@ -13,6 +13,7 @@
     Who is this player?
 </Heading>
 
+
 <Table>
     <TableHead>
         <TableHeadCell>Rank</TableHeadCell>
