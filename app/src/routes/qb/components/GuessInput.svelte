@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Dropdown, DropdownItem, Listgroup, Search } from "flowbite-svelte";
+    import { Button, Search } from "flowbite-svelte";
     import { quarterback_stats, type Quarterback } from "../../../stats";
     import { onMount } from "svelte";
 
