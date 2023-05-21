@@ -1,6 +1,10 @@
 <script lang="ts">
-
+	import { Alert } from 'flowbite-svelte';
+    const x: number = 47.8
 </script>
 
-<h1 class="text-3xl font-bold underline">Welcome to yup</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="p-8">
+	<Alert>
+		<span class="font-medium">INFO ALERT {x}</span> test
+	</Alert>
+</div>
