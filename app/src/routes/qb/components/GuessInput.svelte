@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Search, Select } from "flowbite-svelte";
+    import { Button, Search } from "flowbite-svelte";
     import { quarterback_stats, type Quarterback } from "../../../stats";
     import { onMount } from "svelte";
 
@@ -33,6 +33,7 @@
     
         div?.addEventListener('keydown', (e) => {
             if ((e as KeyboardEvent).key === 'Enter') {
+                if (!quarterbacks?.length) return
                 const qb = quarterbacks[0]
                 guesses.push(qb)
                 quarterbacks = quarterbacks.slice(1)
