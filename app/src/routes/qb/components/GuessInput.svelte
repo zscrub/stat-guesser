@@ -8,7 +8,7 @@
     let guesses: Array<Quarterback | undefined> = [];
 
     $: quarterbacks = input?.length ? 
-        quarterback_stats.filter((qb) => qb.NAME.toLowerCase().includes(input.toLowerCase()) && !guesses.includes(qb.NAME.toLowerCase()))
+        quarterback_stats.filter((qb) => qb.NAME.toLowerCase().includes(input.toLowerCase()) && !guesses.includes(qb))
     : quarterback_stats.filter((qb) => !guesses.includes(qb))
 
     const process_guess = (event: MouseEvent | null) => {
@@ -19,6 +19,7 @@
         
         quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb))
         input = ""
+        console.log(guesses)
     }
 
     onMount(() => {
