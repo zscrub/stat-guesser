@@ -15,8 +15,8 @@
 
 
 <Table>
-    <TableHead>
-        <TableHeadCell>Rank</TableHeadCell>
+    <TableHead class="text-center">
+        <TableHeadCell>Fantasy Rank</TableHeadCell>
         <TableHeadCell>Passing TDs</TableHeadCell>
         <TableHeadCell>Interceptions</TableHeadCell>
         <TableHeadCell>Passing Yards</TableHeadCell>
@@ -35,7 +35,7 @@
         <TableHeadCell>Rostered %</TableHeadCell>
     </TableHead>
     <TableBody>
-        <TableBodyRow>
+        <TableBodyRow class="text-center">
             <TableBodyCell>{quarterback.RANK}</TableBodyCell>
             <TableBodyCell>{quarterback.PASS_TD}</TableBodyCell>
             <TableBodyCell>{quarterback.INT}</TableBodyCell>
