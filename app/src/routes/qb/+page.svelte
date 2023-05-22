@@ -10,11 +10,11 @@
         <UnknownPlayer />
     </section>
 
-    <section>
+    <section class="h-full grid grid-cols-1 gap-4 content-between p-4">
         <GuessInput />
     </section>
 
-    <section class="pt-5">
+    <section class="h-full grid grid-cols-1 gap-4 content-between p-4">
         <GuessTable />
     </section>
 </div>

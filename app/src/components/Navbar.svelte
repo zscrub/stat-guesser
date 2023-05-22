@@ -2,7 +2,7 @@
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input, Span } from 'flowbite-svelte'
   </script>
   
-  <Navbar class="mb-2" let:hidden>
+  <Navbar let:hidden>
     <NavBrand href="/qb">
     <Span gradient class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
         Stat-Guesser

@@ -1,34 +1,43 @@
 <script lang="ts">
-    let guesses = [1]
+    import { Heading, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from "flowbite-svelte";
+    import { guesses } from "../../../stores";
 </script>
 
+<hr /> 
+
 <section>
-    {#if guesses.length}
-        <!-- <p>yup</p> -->
-        <!-- {console.log("yup")} -->
-        <!-- {#each guesses as quarterback}
-            <Table>
-                <TableHead class="text-center">
-                    <TableHeadCell>Fantasy Rank</TableHeadCell>
-                    <TableHeadCell>Passing TDs</TableHeadCell>
-                    <TableHeadCell>Interceptions</TableHeadCell>
-                    <TableHeadCell>Passing Yards</TableHeadCell>
-                    <TableHeadCell>Yards per Attempt</TableHeadCell>
-                    <TableHeadCell>Completions</TableHeadCell>
-                    <TableHeadCell>Pass Attempts</TableHeadCell>
-                    <TableHeadCell>Completion %</TableHeadCell>
-                    <TableHeadCell>Sacks</TableHeadCell>
-                    <TableHeadCell>Rush Attempts</TableHeadCell>
-                    <TableHeadCell>Rush Yards</TableHeadCell>
-                    <TableHeadCell>Rush TDs</TableHeadCell>
-                    <TableHeadCell>Fumbles</TableHeadCell>
-                    <TableHeadCell>Games Played</TableHeadCell>
-                    <TableHeadCell>Fantasy Points</TableHeadCell>
-                    <TableHeadCell>Fantasy Points per Game</TableHeadCell>
-                    <TableHeadCell>Rostered %</TableHeadCell>
-                </TableHead>
-                <TableBody>
+    {#if $guesses.length}
+
+        <Heading tag="h2" class="pb-3 text-center">
+            Guesses
+        </Heading>
+
+
+        <Table>
+            <TableHead class="text-center">
+                <TableHeadCell>Player Name</TableHeadCell>
+                <TableHeadCell>Fantasy Rank</TableHeadCell>
+                <TableHeadCell>Passing TDs</TableHeadCell>
+                <TableHeadCell>Interceptions</TableHeadCell>
+                <TableHeadCell>Passing Yards</TableHeadCell>
+                <TableHeadCell>Yards per Attempt</TableHeadCell>
+                <TableHeadCell>Completions</TableHeadCell>
+                <TableHeadCell>Pass Attempts</TableHeadCell>
+                <TableHeadCell>Completion %</TableHeadCell>
+                <TableHeadCell>Sacks</TableHeadCell>
+                <TableHeadCell>Rush Attempts</TableHeadCell>
+                <TableHeadCell>Rush Yards</TableHeadCell>
+                <TableHeadCell>Rush TDs</TableHeadCell>
+                <TableHeadCell>Fumbles</TableHeadCell>
+                <TableHeadCell>Games Played</TableHeadCell>
+                <TableHeadCell>Fantasy Points</TableHeadCell>
+                <TableHeadCell>Fantasy Points per Game</TableHeadCell>
+                <TableHeadCell>Rostered %</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                {#each $guesses as quarterback}
                     <TableBodyRow class="text-center">
+                        <TableBodyCell>{quarterback?.NAME}</TableBodyCell>
                         <TableBodyCell>{quarterback?.RANK}</TableBodyCell>
                         <TableBodyCell>{quarterback?.PASS_TD}</TableBodyCell>
                         <TableBodyCell>{quarterback?.INT}</TableBodyCell>
@@ -47,9 +56,9 @@
                         <TableBodyCell>{quarterback?.FPTSPG}</TableBodyCell>
                         <TableBodyCell>{quarterback?.ROST}</TableBodyCell>
                     </TableBodyRow>
-                </TableBody>
-            </Table>
-        {/each} -->
+                {/each}
+            </TableBody>
+        </Table>
     {/if}
 </section>
     
