@@ -2,14 +2,14 @@
     import { Button, Search } from "flowbite-svelte";
     import { quarterback_stats, type Quarterback } from "../../../stats";
     import { onMount } from "svelte";
+    import { guesses } from "../../../stores";
 
     let input: string = "";
     let quarterbacks: Array<Quarterback>;
-    let guesses: Array<Quarterback | undefined> = [];
 
     $: quarterbacks = input?.length ? 
-        quarterback_stats.filter((qb) => qb.NAME.toLowerCase().includes(input.toLowerCase()) && !guesses.includes(qb))
-    : quarterback_stats.filter((qb) => !guesses.includes(qb))
+        quarterback_stats.filter((qb) => qb.NAME.toLowerCase().includes(input.toLowerCase()) && !$guesses.includes(qb))
+    : quarterback_stats.filter((qb) => !$guesses.includes(qb))
 
     const process_guess = (event: MouseEvent | null) => {
         if (event instanceof MouseEvent) {
@@ -22,10 +22,11 @@
             return
         }
 
-        guesses.push(res)
+        $guesses.push(res)
         
-        quarterbacks = quarterbacks.filter((qb) => !guesses.includes(qb))
+        quarterbacks = quarterbacks.filter((qb) => !$guesses.includes(qb))
         input = ""
+        console.log($guesses)
     }
 
     onMount(() => {
@@ -35,7 +36,7 @@
             if ((e as KeyboardEvent).key === 'Enter') {
                 if (!quarterbacks?.length) return
                 const qb = quarterbacks[0]
-                guesses.push(qb)
+                $guesses.push(qb)
                 quarterbacks = quarterbacks.slice(1)
                 input = ""
             }
@@ -45,10 +46,10 @@
 
 
 <Search id="search" placeholder="Guess the player" bind:value={input} />
-<section class="max-h-32">
+<section class="max-h-32 pt-1">
     <div class="overflow-y-auto max-h-96 border border-gray-500 rounded-md">
         {#each quarterbacks as quarterback}
-            <Button class="w-full pt-3" color="alternative" size="lg" on:click={process_guess} outline>
+            <Button class="w-full pt-3" color="alternative" size="lg" on:click={process_guess} outline disabled>
                 {quarterback.NAME}
             </Button>
             <br />
