@@ -1,18 +1,6 @@
 <script lang="ts">
     import { Heading, Helper, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from "flowbite-svelte";
     import { guesses, max_guesses, qb_stats } from "../../../stores";
-
-    // const guessed_qbs = $guesses
-
-    $: $guesses.map((qb) => {
-        // const player_index = $qb_stats.findIndex(([key]) => key !== "NAME")
-        
-        // if (player_index > -1) {
-            // const player_name 
-        // }
-    })
-
-    $: console.log($guesses)
 </script>
 
 <hr /> 
