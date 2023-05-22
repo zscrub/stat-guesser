@@ -1,16 +1,18 @@
 <script lang="ts">
     import { Heading, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from "flowbite-svelte";
     import { quarterback_stats } from '../../../stats';
+    import { guesses, max_guesses, solution } from "../../../stores";
 
     const quarterbacks = quarterback_stats.filter((qb) => {
         return qb.FPTS !== "0" ? true : false
     })
 
     const quarterback = quarterbacks[Math.floor(Math.random() * quarterbacks.length)];
+    $solution = quarterback
 </script>
 
 <Heading tag="h2" class="pb-3 text-center">
-    Who is this player?
+    {$guesses.length >= max_guesses ? `The player was ${$solution.NAME}!` : "Who is this player?"}
 </Heading>
 
 
@@ -36,23 +38,23 @@
     </TableHead>
     <TableBody>
         <TableBodyRow class="text-center">
-            <TableBodyCell>{quarterback.RANK}</TableBodyCell>
-            <TableBodyCell>{quarterback.PASS_TD}</TableBodyCell>
-            <TableBodyCell>{quarterback.INT}</TableBodyCell>
-            <TableBodyCell>{quarterback.PASS_YDS}</TableBodyCell>
-            <TableBodyCell>{quarterback.YPA}</TableBodyCell>
-            <TableBodyCell>{quarterback.CMP}</TableBodyCell>
-            <TableBodyCell>{quarterback.PASS_ATT}</TableBodyCell>
-            <TableBodyCell>{quarterback.PCT}</TableBodyCell>
-            <TableBodyCell>{quarterback.SACKS}</TableBodyCell>
-            <TableBodyCell>{quarterback.RUSH_ATT}</TableBodyCell>
-            <TableBodyCell>{quarterback.RUSH_YDS}</TableBodyCell>
-            <TableBodyCell>{quarterback.RUSH_TD}</TableBodyCell>
-            <TableBodyCell>{quarterback.FUMBLES}</TableBodyCell>
-            <TableBodyCell>{quarterback.GAMES_PLAYED}</TableBodyCell>
-            <TableBodyCell>{quarterback.FPTS}</TableBodyCell>
-            <TableBodyCell>{quarterback.FPTSPG}</TableBodyCell>
-            <TableBodyCell>{quarterback.ROST}</TableBodyCell>
+            <TableBodyCell>{$solution.RANK}</TableBodyCell>
+            <TableBodyCell>{$solution.PASS_TD}</TableBodyCell>
+            <TableBodyCell>{$solution.INT}</TableBodyCell>
+            <TableBodyCell>{$solution.PASS_YDS}</TableBodyCell>
+            <TableBodyCell>{$solution.YPA}</TableBodyCell>
+            <TableBodyCell>{$solution.CMP}</TableBodyCell>
+            <TableBodyCell>{$solution.PASS_ATT}</TableBodyCell>
+            <TableBodyCell>{$solution.PCT}</TableBodyCell>
+            <TableBodyCell>{$solution.SACKS}</TableBodyCell>
+            <TableBodyCell>{$solution.RUSH_ATT}</TableBodyCell>
+            <TableBodyCell>{$solution.RUSH_YDS}</TableBodyCell>
+            <TableBodyCell>{$solution.RUSH_TD}</TableBodyCell>
+            <TableBodyCell>{$solution.FUMBLES}</TableBodyCell>
+            <TableBodyCell>{$solution.GAMES_PLAYED}</TableBodyCell>
+            <TableBodyCell>{$solution.FPTS}</TableBodyCell>
+            <TableBodyCell>{$solution.FPTSPG}</TableBodyCell>
+            <TableBodyCell>{$solution.ROST}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
 </Table>

@@ -12,15 +12,14 @@
     : quarterback_stats.filter((qb) => !$guesses.includes(qb))
 
     const process_guess = (event: MouseEvent) => {
+        if ($guesses.length >= max_guesses) return
+        
         if (event instanceof MouseEvent) {
             input = (event?.target as HTMLElement)?.textContent ?? ""
         }
 
         const qb = quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase())
-
-        if (qb === undefined) {
-            return
-        }
+        if (qb === undefined) return
 
         guesses.update(arr => [...arr, qb])
         
@@ -32,6 +31,8 @@
         const div = document.getElementById("search")
     
         div?.addEventListener('keydown', (e) => {
+            if ($guesses.length >= max_guesses) return
+            
             if ((e as KeyboardEvent).key === 'Enter') {
                 if (!quarterbacks?.length) return
                 const qb = quarterbacks[0]
@@ -45,7 +46,7 @@
 
 <section>
     <Search id="search" placeholder="Guess the player" bind:value={input} />
-    <section class="max-h-32 mb-32">
+    <section class="max-h-32 mb-40">
         <div class="overflow-y-auto max-h-72 border border-gray-500 rounded-md">
             {#each quarterbacks as quarterback}
                 <Button class="w-full pt-3" color="alternative" size="lg" on:click={process_guess} outline disabled={$guesses.length >= max_guesses ? true : false}>
