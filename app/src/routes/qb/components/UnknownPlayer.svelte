@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Heading, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from "flowbite-svelte";
+    import { Heading, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Helper } from "flowbite-svelte";
     import { quarterback_stats } from '../../../stats';
-    import { guesses, max_guesses, solution } from "../../../stores";
+    import { guesses, max_guesses, solution, qb_stats } from "../../../stores";
 
     const quarterbacks = quarterback_stats.filter((qb) => {
         return qb.FPTS !== "0" ? true : false
@@ -11,13 +11,33 @@
     $solution = quarterback
 
     // take attributes of qb and randomize order of how they appear
-    
-    
+    let attributes = Object.entries(quarterback)
+    $qb_stats = attributes.sort(() => Math.random() - 0.5);
 
     // hide all but the first 2 attributes, show more as the user guesses
         // will need to write to a store to update GuessTable to display the same stats in the same order
             // array of quarterback stats, either Array<Tuple> or Array<QuarterbackAttribute>
 </script>
+
+
+<Helper>
+    Passing TDs
+    Interceptions, 
+    Passing Yards, 
+    Yards per Attempt, 
+    Completions, 
+    Pass Attempts, 
+    Completion %, 
+    Sacks, 
+    Rush Attempts, 
+    Rush Yards, 
+    Rush TDs, 
+    Fumbles, 
+    Games Played, 
+    Fantasy Point, 
+    Fantasy Points per Game, 
+    Rostered %
+</Helper>
 
 <Heading tag="h2" class="pb-3 text-center">
     {$guesses.length >= max_guesses ? `The player was ${$solution.NAME}!` : "Who is this player?"}
@@ -26,27 +46,21 @@
 
 <Table>
     <TableHead class="text-center">
-        <TableHeadCell>Fantasy Rank</TableHeadCell>
-        <TableHeadCell>Passing TDs</TableHeadCell>
-        <TableHeadCell>Interceptions</TableHeadCell>
-        <TableHeadCell>Passing Yards</TableHeadCell>
-        <TableHeadCell>Yards per Attempt</TableHeadCell>
-        <TableHeadCell>Completions</TableHeadCell>
-        <TableHeadCell>Pass Attempts</TableHeadCell>
-        <TableHeadCell>Completion %</TableHeadCell>
-        <TableHeadCell>Sacks</TableHeadCell>
-        <TableHeadCell>Rush Attempts</TableHeadCell>
-        <TableHeadCell>Rush Yards</TableHeadCell>
-        <TableHeadCell>Rush TDs</TableHeadCell>
-        <TableHeadCell>Fumbles</TableHeadCell>
-        <TableHeadCell>Games Played</TableHeadCell>
-        <TableHeadCell>Fantasy Points</TableHeadCell>
-        <TableHeadCell>Fantasy Points per Game</TableHeadCell>
-        <TableHeadCell>Rostered %</TableHeadCell>
+        {#each $qb_stats as [key, stat]}
+            {#if key !== "NAME"}
+                <TableHeadCell>{key.replace("_", " ")}</TableHeadCell>
+            {/if}
+        {/each}
     </TableHead>
     <TableBody>
-        <TableBodyRow class="text-center">
-            <TableBodyCell>{quarterback.RANK}</TableBodyCell>
+        <TableBodyRow class="text-center">        
+                {#each $qb_stats as [key, stat]}
+                    {#if key !== "NAME"}
+                        <TableBodyCell>{stat}</TableBodyCell>
+                    {/if}
+                {/each}
+            </TableBodyRow>
+            <!-- <TableBodyCell>{quarterback.RANK}</TableBodyCell>
             <TableBodyCell>{quarterback.PASS_TD}</TableBodyCell>
             <TableBodyCell>{quarterback.INT}</TableBodyCell>
             <TableBodyCell>{quarterback.PASS_YDS}</TableBodyCell>
@@ -62,7 +76,6 @@
             <TableBodyCell>{quarterback.GAMES_PLAYED}</TableBodyCell>
             <TableBodyCell>{quarterback.FPTS}</TableBodyCell>
             <TableBodyCell>{quarterback.FPTSPG}</TableBodyCell>
-            <TableBodyCell>{quarterback.ROST}</TableBodyCell>
-        </TableBodyRow>
+            <TableBodyCell>{quarterback.ROST}</TableBodyCell> -->
     </TableBody>
 </Table>

@@ -1,6 +1,18 @@
 <script lang="ts">
     import { Heading, Helper, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from "flowbite-svelte";
-    import { guesses, max_guesses } from "../../../stores";
+    import { guesses, max_guesses, qb_stats } from "../../../stores";
+
+    // const guessed_qbs = $guesses
+
+    $: $guesses.map((qb) => {
+        // const player_index = $qb_stats.findIndex(([key]) => key !== "NAME")
+        
+        // if (player_index > -1) {
+            // const player_name 
+        // }
+    })
+
+    $: console.log($guesses)
 </script>
 
 <hr /> 
@@ -19,46 +31,18 @@
 
         <Table>
             <TableHead class="text-center">
-                <TableHeadCell>Player Name</TableHeadCell>
-                <TableHeadCell>Fantasy Rank</TableHeadCell>
-                <TableHeadCell>Passing TDs</TableHeadCell>
-                <TableHeadCell>Interceptions</TableHeadCell>
-                <TableHeadCell>Passing Yards</TableHeadCell>
-                <TableHeadCell>Yards per Attempt</TableHeadCell>
-                <TableHeadCell>Completions</TableHeadCell>
-                <TableHeadCell>Pass Attempts</TableHeadCell>
-                <TableHeadCell>Completion %</TableHeadCell>
-                <TableHeadCell>Sacks</TableHeadCell>
-                <TableHeadCell>Rush Attempts</TableHeadCell>
-                <TableHeadCell>Rush Yards</TableHeadCell>
-                <TableHeadCell>Rush TDs</TableHeadCell>
-                <TableHeadCell>Fumbles</TableHeadCell>
-                <TableHeadCell>Games Played</TableHeadCell>
-                <TableHeadCell>Fantasy Points</TableHeadCell>
-                <TableHeadCell>Fantasy Points per Game</TableHeadCell>
-                <TableHeadCell>Rostered %</TableHeadCell>
+                <TableHeadCell>NAME</TableHeadCell>
+                {#each $qb_stats as [key, stat]}
+                    <TableHeadCell class={key === "NAME" ? "hidden" : ""}>{key.replace("_", " ")}</TableHeadCell>
+                {/each}
             </TableHead>
             <TableBody>
                 {#each $guesses as quarterback}
                     <TableBodyRow class="text-center">
-                        <TableBodyCell>{quarterback.NAME}</TableBodyCell>
-                        <TableBodyCell>{quarterback.RANK}</TableBodyCell>
-                        <TableBodyCell>{quarterback.PASS_TD}</TableBodyCell>
-                        <TableBodyCell>{quarterback.INT}</TableBodyCell>
-                        <TableBodyCell>{quarterback.PASS_YDS}</TableBodyCell>
-                        <TableBodyCell>{quarterback.YPA}</TableBodyCell>
-                        <TableBodyCell>{quarterback.CMP}</TableBodyCell>
-                        <TableBodyCell>{quarterback.PASS_ATT}</TableBodyCell>
-                        <TableBodyCell>{quarterback.PCT}</TableBodyCell>
-                        <TableBodyCell>{quarterback.SACKS}</TableBodyCell>
-                        <TableBodyCell>{quarterback.RUSH_ATT}</TableBodyCell>
-                        <TableBodyCell>{quarterback.RUSH_YDS}</TableBodyCell>
-                        <TableBodyCell>{quarterback.RUSH_TD}</TableBodyCell>
-                        <TableBodyCell>{quarterback.FUMBLES}</TableBodyCell>
-                        <TableBodyCell>{quarterback.GAMES_PLAYED}</TableBodyCell>
-                        <TableBodyCell>{quarterback.FPTS}</TableBodyCell>
-                        <TableBodyCell>{quarterback.FPTSPG}</TableBodyCell>
-                        <TableBodyCell>{quarterback.ROST}</TableBodyCell>
+                            <TableBodyCell>{quarterback.NAME}</TableBodyCell>
+                        {#each $qb_stats as [key, stat]}
+                            <TableBodyCell class={key === "NAME" ? "hidden" : ""}>{quarterback[key]}</TableBodyCell>
+                        {/each}
                     </TableBodyRow>
                 {/each}
             </TableBody>

@@ -45,7 +45,11 @@
 </script>
 
 <section>
-    <Search id="search" placeholder="Guess the player" bind:value={input} />
+    <Search 
+        id="search" 
+        placeholder="Guess the player" 
+        bind:value={input} 
+    />
     <section class="max-h-32 mb-40">
         <div class="overflow-y-auto max-h-72 border border-gray-500 rounded-md">
             {#each quarterbacks as quarterback}
