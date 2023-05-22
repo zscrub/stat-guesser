@@ -9,6 +9,14 @@
 
     const quarterback = quarterbacks[Math.floor(Math.random() * quarterbacks.length)];
     $solution = quarterback
+
+    // take attributes of qb and randomize order of how they appear
+    
+    
+
+    // hide all but the first 2 attributes, show more as the user guesses
+        // will need to write to a store to update GuessTable to display the same stats in the same order
+            // array of quarterback stats, either Array<Tuple> or Array<QuarterbackAttribute>
 </script>
 
 <Heading tag="h2" class="pb-3 text-center">
@@ -38,23 +46,23 @@
     </TableHead>
     <TableBody>
         <TableBodyRow class="text-center">
-            <TableBodyCell>{$solution.RANK}</TableBodyCell>
-            <TableBodyCell>{$solution.PASS_TD}</TableBodyCell>
-            <TableBodyCell>{$solution.INT}</TableBodyCell>
-            <TableBodyCell>{$solution.PASS_YDS}</TableBodyCell>
-            <TableBodyCell>{$solution.YPA}</TableBodyCell>
-            <TableBodyCell>{$solution.CMP}</TableBodyCell>
-            <TableBodyCell>{$solution.PASS_ATT}</TableBodyCell>
-            <TableBodyCell>{$solution.PCT}</TableBodyCell>
-            <TableBodyCell>{$solution.SACKS}</TableBodyCell>
-            <TableBodyCell>{$solution.RUSH_ATT}</TableBodyCell>
-            <TableBodyCell>{$solution.RUSH_YDS}</TableBodyCell>
-            <TableBodyCell>{$solution.RUSH_TD}</TableBodyCell>
-            <TableBodyCell>{$solution.FUMBLES}</TableBodyCell>
-            <TableBodyCell>{$solution.GAMES_PLAYED}</TableBodyCell>
-            <TableBodyCell>{$solution.FPTS}</TableBodyCell>
-            <TableBodyCell>{$solution.FPTSPG}</TableBodyCell>
-            <TableBodyCell>{$solution.ROST}</TableBodyCell>
+            <TableBodyCell>{quarterback.RANK}</TableBodyCell>
+            <TableBodyCell>{quarterback.PASS_TD}</TableBodyCell>
+            <TableBodyCell>{quarterback.INT}</TableBodyCell>
+            <TableBodyCell>{quarterback.PASS_YDS}</TableBodyCell>
+            <TableBodyCell>{quarterback.YPA}</TableBodyCell>
+            <TableBodyCell>{quarterback.CMP}</TableBodyCell>
+            <TableBodyCell>{quarterback.PASS_ATT}</TableBodyCell>
+            <TableBodyCell>{quarterback.PCT}</TableBodyCell>
+            <TableBodyCell>{quarterback.SACKS}</TableBodyCell>
+            <TableBodyCell>{quarterback.RUSH_ATT}</TableBodyCell>
+            <TableBodyCell>{quarterback.RUSH_YDS}</TableBodyCell>
+            <TableBodyCell>{quarterback.RUSH_TD}</TableBodyCell>
+            <TableBodyCell>{quarterback.FUMBLES}</TableBodyCell>
+            <TableBodyCell>{quarterback.GAMES_PLAYED}</TableBodyCell>
+            <TableBodyCell>{quarterback.FPTS}</TableBodyCell>
+            <TableBodyCell>{quarterback.FPTSPG}</TableBodyCell>
+            <TableBodyCell>{quarterback.ROST}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
 </Table>
