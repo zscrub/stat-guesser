@@ -60,22 +60,5 @@
                     {/if}
                 {/each}
             </TableBodyRow>
-            <!-- <TableBodyCell>{quarterback.RANK}</TableBodyCell>
-            <TableBodyCell>{quarterback.PASS_TD}</TableBodyCell>
-            <TableBodyCell>{quarterback.INT}</TableBodyCell>
-            <TableBodyCell>{quarterback.PASS_YDS}</TableBodyCell>
-            <TableBodyCell>{quarterback.YPA}</TableBodyCell>
-            <TableBodyCell>{quarterback.CMP}</TableBodyCell>
-            <TableBodyCell>{quarterback.PASS_ATT}</TableBodyCell>
-            <TableBodyCell>{quarterback.PCT}</TableBodyCell>
-            <TableBodyCell>{quarterback.SACKS}</TableBodyCell>
-            <TableBodyCell>{quarterback.RUSH_ATT}</TableBodyCell>
-            <TableBodyCell>{quarterback.RUSH_YDS}</TableBodyCell>
-            <TableBodyCell>{quarterback.RUSH_TD}</TableBodyCell>
-            <TableBodyCell>{quarterback.FUMBLES}</TableBodyCell>
-            <TableBodyCell>{quarterback.GAMES_PLAYED}</TableBodyCell>
-            <TableBodyCell>{quarterback.FPTS}</TableBodyCell>
-            <TableBodyCell>{quarterback.FPTSPG}</TableBodyCell>
-            <TableBodyCell>{quarterback.ROST}</TableBodyCell> -->
     </TableBody>
 </Table>
