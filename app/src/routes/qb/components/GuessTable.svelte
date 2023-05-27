@@ -1,6 +1,14 @@
 <script lang="ts">
     import { Heading, Helper, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from "flowbite-svelte";
     import { guesses, max_guesses, qb_stats } from "../../../stores";
+    import type { Quarterback } from "../../../stats";
+
+    type IndexedQuarterback = Quarterback & {
+        [key: string]: unknown;
+    }
+
+    const Guesses: Array<IndexedQuarterback> = $guesses
+
 </script>
 
 <hr /> 
@@ -20,15 +28,15 @@
         <Table>
             <TableHead class="text-center">
                 <TableHeadCell>NAME</TableHeadCell>
-                {#each $qb_stats as [key, stat]}
+                {#each $qb_stats as [key, _]}
                     <TableHeadCell class={key === "NAME" ? "hidden" : ""}>{key.replace("_", " ")}</TableHeadCell>
                 {/each}
             </TableHead>
             <TableBody>
-                {#each $guesses as quarterback}
+                {#each Guesses as quarterback}
                     <TableBodyRow class="text-center">
                             <TableBodyCell>{quarterback.NAME}</TableBodyCell>
-                        {#each $qb_stats as [key, stat]}
+                        {#each $qb_stats as [key, _]}
                             <TableBodyCell class={key === "NAME" ? "hidden" : ""}>{quarterback[key]}</TableBodyCell>
                         {/each}
                     </TableBodyRow>
