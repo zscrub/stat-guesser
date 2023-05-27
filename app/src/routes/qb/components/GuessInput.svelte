@@ -21,7 +21,7 @@
         const qb = quarterbacks.find((qb) => qb.NAME.toLowerCase() === input.toLowerCase())
         if (qb === undefined) return
 
-        guesses.update(arr => [...arr, qb])
+        guesses.update(arr => [qb, ...arr])
         
         quarterbacks = quarterbacks.filter((qb) => !$guesses.includes(qb))
         input = ""
