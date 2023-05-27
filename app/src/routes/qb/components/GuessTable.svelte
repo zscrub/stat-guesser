@@ -7,7 +7,8 @@
         [key: string]: unknown;
     }
 
-    const Guesses: Array<IndexedQuarterback> = $guesses
+    let Guesses: Array<IndexedQuarterback>;
+    $: Guesses = $guesses
 
 </script>
 
