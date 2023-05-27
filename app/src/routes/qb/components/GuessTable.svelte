@@ -36,7 +36,7 @@
             <TableBody>
                 {#each Guesses as quarterback}
                     <TableBodyRow class="text-center">
-                            <TableBodyCell>{quarterback.NAME}</TableBodyCell>
+                        <TableBodyCell>{quarterback.NAME}</TableBodyCell>
                         {#each $qb_stats as [key, _]}
                             <TableBodyCell class={key === "NAME" ? "hidden" : ""}>{quarterback[key]}</TableBodyCell>
                         {/each}
